@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Este proyecto es una API REST desarrollada en **FastAPI**, usando **MongoDB** como base de datos. Se encuentra dockerizado para facilitar su despliegue y uso.
+Este proyecto es una API REST desarrollada en **FastAPI**, usando **MongoDB** como base de datos Dockerizado
 
 ---
 
@@ -93,15 +93,16 @@ El archivo `.env` se usa para configurar variables sensibles (URLs), proximament
 DATABASE_URL=mongodb://mongo:27017/DBPruebaTecnica
 ```
 
-Puedes modificarlo según necesidades específicas de tu entorno.
+Se recomienda no modificarlo.
 
 ---
 
 ## Notas adicionales
 
-- El proyecto usa contraseñas hasheadas con bcrypt y tokens JWT con clave secreta.
+- El proyecto almacena contraseñas hasheadas con bcrypt y los tokens se generan con JWT con clave secreta.
 - La base de datos es persistente solo mientras los contenedores están arriba (a menos que añadas volúmenes permanentes en Docker Compose).
-
+- La IA se empleó principalmente para corrección de errores y explicación de conceptos del proyecto principal; no obstante, también se generó y utilizó código para las pruebas unitarias y este README.
+- El repositorio tiene 2 imágenes llamadas "Diagrama_Solucion.png" y "Pytest_Diagrama_Solucion.png" que son los daigramas de flujo de la solución propuesta para la prueba técnica.
 ---
 
 ## Autor
