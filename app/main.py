@@ -1,14 +1,11 @@
 import os, jwt, bcrypt, re
-from uuid import UUID, uuid4
+from uuid import uuid4
 from datetime import datetime, timedelta, timezone
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import Response
 from pydantic import BaseModel, Field, EmailStr, field_validator
-
 from app.config import settings
-
 import pymongo
 from pymongo import AsyncMongoClient
 
@@ -99,7 +96,7 @@ async def register(input: InputModel):
     if await users_collection.find_one({"email": input.email}):
         raise HTTPException(409, detail={"mensaje": "Usuario ya registrado"})
     
-    #If not registered
+    #If not registered get the time and create the JWT token
     now = datetime.now(timezone.utc)
     aux_uuid = uuid4()
     payload = {
@@ -108,8 +105,8 @@ async def register(input: InputModel):
         "emited": now.timestamp(),
         "expire": int((now + timedelta(minutes=15)).timestamp()) 
     }
-    # Create the object user in the way to organize the data and fast save/return 
     jwt_token = jwt.encode(payload=payload, key=settings.jwt_private_key, algorithm="HS256")
+    # Create the object user in the way to organize the data and fast save/return 
     new_user = UserModelDB(
         id = str(aux_uuid),
         name = input.name,
@@ -128,7 +125,7 @@ async def register(input: InputModel):
         id = str(aux_uuid),
         name = input.name,
         email = input.email,
-        password= input.password,   # Hashed Password stored in DB, but not when it's returned
+        password= input.password,   # Hashed Password stored in DB, but the password returned is not hashed
         phones = input.phones,
         created = now,
         modified = now,
