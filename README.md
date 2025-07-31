@@ -6,7 +6,7 @@ Este proyecto es una API REST desarrollada en **FastAPI**, usando **MongoDB** co
 
 ---
 
-## 📋 Requisitos previos
+## Requisitos previos
 
 - **Git**
 - **Docker**
