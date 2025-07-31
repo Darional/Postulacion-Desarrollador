@@ -92,12 +92,6 @@ class UserModelDB(BaseModel):
     token: str
     isactive: bool = True
 
-
-
-@app.get("/")
-def root():
-    return {"Project": "Working (I Hope)"} 
-
 @app.post("/register", response_model=OutputModel, status_code=201)
 async def register(input: InputModel):
     
